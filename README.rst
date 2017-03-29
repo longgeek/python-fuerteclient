@@ -31,4 +31,5 @@ Dependent on the installation of the bat:
     mkdir /opt/git && cd /opt/git
     git clone git@git.pyindex.com:reviewdev/python-fuerteclient.git
     cd python-fuerteclient/
+    pip install -r requirements.txt
     python setup.py develop
