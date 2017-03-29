@@ -6,14 +6,13 @@ import simplejson as json
 from utils import pack_requests
 
 
-def execute(url, cmds):
-    """ 在 Docker 主机上执行命 """
+def execute(url, cid, cmds):
+    """ 在容器所在 Docker 主机上执行命令 """
 
     data = {
         "action": "Host:Exec",
-        "params": {"cmds": cmds}
+        "params": {"cid": cid, "cmds": cmds}
     }
-
     kwargs = {"url": url, "data": json.dumps(data)}
     return pack_requests(**kwargs)
 
@@ -25,7 +24,6 @@ def read_files(url, files, cid=None):
         "action": "Host:ReadFiles",
         "params": {"files": files, "cid": cid}
     }
-
     kwargs = {"url": url, "data": json.dumps(data)}
     return pack_requests(**kwargs)
 
@@ -37,6 +35,16 @@ def write_files(url, files, cid=None):
         "action": "Host:WriteFiles",
         "params": {"files": files, "cid": cid}
     }
+    kwargs = {"url": url, "data": json.dumps(data)}
+    return pack_requests(**kwargs)
 
+
+def fd_check(url, cid, fds):
+    """ 在容器所在 Docker 主机上检测文件、目录是否创建 """
+
+    data = {
+        "action": "Host:FdCheck",
+        "params": {"cid": cid, "fds": fds}
+    }
     kwargs = {"url": url, "data": json.dumps(data)}
     return pack_requests(**kwargs)
