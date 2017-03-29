@@ -3,7 +3,6 @@
 # Author: Longgeek <longgeek@fuvism.com>
 
 import simplejson as json
-
 from utils import pack_requests
 
 

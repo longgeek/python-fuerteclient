@@ -3,7 +3,6 @@
 # Author: Longgeek <longgeek@fuvism.com>
 
 import simplejson as json
-
 from utils import pack_requests
 
 
@@ -19,24 +18,24 @@ def execute(url, cmds):
     return pack_requests(**kwargs)
 
 
-def read_files(url, files):
-    """ 读取共享存储中文件的内容 """
+def read_files(url, files, cid=None):
+    """ 读取 Docker 主机或容器上文件的内容 """
 
     data = {
         "action": "Host:ReadFiles",
-        "params": {"files": files}
+        "params": {"files": files, "cid": cid}
     }
 
     kwargs = {"url": url, "data": json.dumps(data)}
     return pack_requests(**kwargs)
 
 
-def write_files(url, files):
-    """ 写入文件内容到共享存储 """
+def write_files(url, files, cid=None):
+    """ 为 Docker 主机或容器里写入文件内容 """
 
     data = {
         "action": "Host:WriteFiles",
-        "params": {"files": files}
+        "params": {"files": files, "cid": cid}
     }
 
     kwargs = {"url": url, "data": json.dumps(data)}
