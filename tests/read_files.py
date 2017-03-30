@@ -2,7 +2,8 @@
 # encoding: utf-8
 # Author: Longgeek <longgeek@fuvism.com>
 
-from api_url import URL
+from _config import URL
+from _config import TOKEN
 from fuerteclient import host
 
 cid = raw_input("\n如需要为容器里的文件写入内容，需要输入容器完整的 ID,\
@@ -14,5 +15,6 @@ print "\n"
 print host.read_files(
     URL,
     files,
-    cid
+    cid,
+    TOKEN
 )

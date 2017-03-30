@@ -19,6 +19,9 @@ def pack_requests(**kwargs):
     """ Add a certificate for requests """
 
     kwargs["headers"] = {"content-type": "application/json"}
+    if kwargs["token"]:
+        kwargs["headers"]["token"] = "Bearer %s" % kwargs["token"]
+    kwargs.pop("token")
     req = requests.post(**kwargs)
     status = req.status_code
     if status != 200:
