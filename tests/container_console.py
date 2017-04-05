@@ -14,6 +14,6 @@ print container.console(
     URL,
     "longgeek",
     cid,
-    "ipython",
-    TOKEN
+    cmds=None,
+    token=TOKEN
 )

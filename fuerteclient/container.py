@@ -43,13 +43,13 @@ def delete(url, username, cid, reset=False, token=None):
     return pack_requests(**kwargs)
 
 
-def console(url, username, cid, cmd=None, token=None):
+def console(url, username, cid, cmds=None, token=None):
     """在容器中打入 Console 进程
 
     :param str url: Fuerte api address
     :param str username: Fuvism user name
     :param str cid: The container uuid
-    :param str or None cmd:
+    :param list or None cmds:
         str: Console command(e.g., `ipython`, `python manager.py runserver`)
         None: Bash console
     :param str or None token: Fuerte auth token
@@ -57,7 +57,7 @@ def console(url, username, cid, cmd=None, token=None):
 
     data = {
         "action": "Container:Console",
-        "params": {"username": username, "cid": cid, "cmd": cmd}
+        "params": {"username": username, "cid": cid, "cmds": cmds}
     }
     kwargs = {"url": url, "data": json.dumps(data), "token": token}
     return pack_requests(**kwargs)

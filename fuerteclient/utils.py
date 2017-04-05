@@ -16,7 +16,14 @@ requests.packages.urllib3.disable_warnings(InsecurePlatformWarning)
 
 
 def pack_requests(**kwargs):
-    """ Add a certificate for requests """
+    """Add a certificate for requests
+
+    :returns: (
+        status: int
+        message: str
+        result: dict
+    )
+    """
 
     kwargs["headers"] = {"content-type": "application/json"}
     if kwargs["token"]:
@@ -25,5 +32,5 @@ def pack_requests(**kwargs):
     req = requests.post(**kwargs)
     status = req.status_code
     if status != 200:
-        return (status, req.text, "")
-    return (status, "", req.json())
+        return (req.json()["inner_code"], req.json()["error"], "")
+    return (0, req.json()["message"], req.json()["data"])

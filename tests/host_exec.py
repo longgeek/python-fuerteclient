@@ -12,5 +12,6 @@ print "\n"
 print host.execute(
     URL,
     cid,
+    "longgeek",
     ["mkdir /tmp/dir1", "mkdir /tmp/dir2"]
 )
