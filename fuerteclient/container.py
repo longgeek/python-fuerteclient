@@ -24,6 +24,23 @@ def create(url, username, image, cid=None, token=None):
     return pack_requests(**kwargs)
 
 
+def is_start(url, username, cid, token=None):
+    """创建容器
+
+    :param str url: Fuerte api address
+    :param str username: Fuvism user name
+    :param str cid: The container uuid
+    :param str or None token: Fuerte auth token
+    """
+
+    data = {
+        "action": "Container:IsStart",
+        "params": {"username": username, "cid": cid}
+    }
+    kwargs = {"url": url, "data": json.dumps(data), "token": token}
+    return pack_requests(**kwargs)
+
+
 def delete(url, username, cid, reset=False, token=None):
     """删除容器
 
