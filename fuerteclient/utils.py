@@ -25,12 +25,18 @@ def pack_requests(**kwargs):
     )
     """
 
-    kwargs["headers"] = {"content-type": "application/json"}
-    if kwargs["token"]:
-        kwargs["headers"]["token"] = "Bearer %s" % kwargs["token"]
-    kwargs.pop("token")
-    req = requests.post(**kwargs)
-    status = req.status_code
-    if status != 200:
-        return (req.json()["inner_code"], req.json()["error"], "")
-    return (0, req.json()["message"], req.json()["data"])
+    try:
+        kwargs["headers"] = {"content-type": "application/json"}
+        if kwargs["token"]:
+            kwargs["headers"]["token"] = "Bearer %s" % kwargs["token"]
+        kwargs.pop("token")
+        req = requests.post(**kwargs)
+        status = req.status_code
+        if status != 200:
+            try:
+                return (req.json()["inner_code"], req.json()["error"], "")
+            except Exception, e:
+                return (status, req.text, "")
+        return (0, req.json()["message"], req.json()["data"])
+    except Exception, e:
+        return (-1, e, "")
