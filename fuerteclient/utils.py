@@ -32,7 +32,7 @@ def pack_requests(**kwargs):
     try:
         req = requests.post(**kwargs)
     except Exception, e:
-        return (-1, e, "")
+        return (-1, str(e), "")
     status = req.status_code
     data = req.json()
     if status != 200:
