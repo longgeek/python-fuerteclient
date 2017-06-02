@@ -38,7 +38,7 @@ def pack_requests(**kwargs):
     if status != 200:
         inner_code = data.get('inner_code')
         if inner_code:
-            return (inner_code, "", data.get("error"))
+            return (inner_code, data.get("error"), "")
         else:
             return (status, req.text, "")
     return (0, data.get("message"), data.get("data"))
